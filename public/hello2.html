@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    <script defer src="/__/firebase/7.13.1/firebase-app.js"></script> 
+    <script defer src="/__/firebase/7.13.1/firebase-database.js">
+    </script> <script defer src="/__/firebase/init.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <h1>{{ body }}</h1>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: '',
+                body: ''
+            }
+        });
+
+        window.onload = function() { 
+            let helloRef = firebase.database().ref("hello"); 
+        helloRef.on('value', (snapshot) => {
+             let hello = snapshot.val(); app.title = hello.title; app.body = hello.body;
+             }); }
+    </script>
+</body>
+</html>
